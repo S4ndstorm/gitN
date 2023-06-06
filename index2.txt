@@ -1,0 +1,43 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+
+string encrypt(string txt, string key) 
+{ 
+    string cipher = ""; 
+    int n = txt.size(); 
+    for (int i = 0; i < n; i++) 
+    { 
+        int x = (txt[i] + key[i % key.size()]) % 26; 
+        x += 'A'; 
+        cipher += x; 
+    } 
+    return cipher; 
+} 
+
+string decrypt(string cipher, string key) 
+{ 
+    string txt = ""; 
+    int n = cipher.size(); 
+    for (int i = 0; i < n; i++) 
+    { 
+        int x = (cipher[i] - key[i % key.size()] + 26) % 26; 
+        x += 'A'; 
+        txt += x; 
+    } 
+    return txt; 
+} 
+
+int main() 
+{ 
+    string plain_txt = "HELLOWORLD"; 
+    string key = "KEY"; 
+    string encrypted_txt = encrypt(plain_txt, key); 
+    string decrypted_txt = decrypt(encrypted_txt, key); 
+    
+    cout << "Plain Text   : " << plain_txt << endl; 
+    cout << "Key          : " << key << endl; 
+    cout << "Encrypted Text: " << encrypted_txt << endl; 
+    cout << "Decrypted Text: " << decrypted_txt << endl; 
+    
+    return 0; 
+} 
